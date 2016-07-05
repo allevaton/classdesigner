@@ -1,0 +1,100 @@
+html, body {
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+}
+
+.calendar {
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  -webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  -moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  -ms-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  -o-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+
+  height: 505px;
+}
+
+.rbc-event {
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  color: white;
+  border-radius: 2px;
+}
+
+.rbc-time-content {
+  border-top: 1px solid #DDD;
+}
+
+.rbc-time-header, .rbc-time-header.rbc-header-overflowing {
+  margin-right: 0 !important;
+  border-right: none;
+  font-family: normal, sans-serif;
+}
+
+.rbc-event-content {
+  font-size: 0.8em;
+
+}
+
+.container {
+  padding: 16px 20px 20px;
+
+  & > div:last-child {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+// EXTRA SMALL (max)
+//@media (max-width: 767px) {
+//}
+
+// EXTRA SMALL (min)
+@media (max-width: 991px) {
+  .container {
+    display: block;
+  }
+
+  .courselist-card {
+    //width: 100%;
+  }
+
+  .calendar {
+    //width: 100%;
+  }
+}
+
+// SMALL
+//@media (min-width: 768px) {
+//}
+
+// MEDIUM
+@media (min-width: 992px) {
+  .container {
+    display: flex;
+  }
+
+  .courselist-card {
+    //width: 35%;
+  }
+
+  .calendar {
+    margin-left: 20px;
+    flex: 1;
+    //box-sizing: border-box;
+
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    -webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    -moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    -ms-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    -o-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  }
+}
+
+// LARGE
+@media (min-width: 1200px) {
+}
+
