@@ -1,9 +1,4 @@
-# State
+# Class Designer
 
-There is no server in this implementation.
-It will rely on the unreliability of the client for data handling.
-
-state = {
-  address: '',
-  addressCompletion: [],
-}
+GOOGLE CALENDAR URL TEMPLATE
+https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20160621T063000Z/20160621T080000Z&recur=RRULE:FREQ=WEEKLY;BYDAY=MO,TU,FR;UNTIL=20160120

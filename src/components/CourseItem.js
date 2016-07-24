@@ -6,8 +6,7 @@ import {getColor, getLineColor} from '../constants/courseColors';
 import {List, ListItem} from 'material-ui/List';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import Checkbox from 'material-ui/Checkbox';
-import AutoComplete from 'material-ui/AutoComplete';
-// import AutoComplete from '../containers/AutoComplete';
+// import AutoComplete from 'material-ui/AutoComplete';
 
 import IconButton from 'material-ui/IconButton';
 import ExpandMore from 'material-ui/svg-icons/navigation/expand-more'
@@ -17,23 +16,10 @@ import FilterIcon from 'material-ui/svg-icons/content/filter-list';
 
 import ClassList from '../containers/ClassList';
 
-// based off AutoComplete.caseInsensitiveFilter
-function caseInsensitiveFilter(searchText, key, item) {
-  return item.value.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
-}
-
 @observer
 export default class CourseItem extends Component {
   static propTypes = {
-    autocompleteData: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired
-    })).isRequired,
-    index: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    tabIndex: PropTypes.number,
-    store: PropTypes.object,
+    backgroundColor: PropTypes.string,
     style: PropTypes.object
   };
 
@@ -54,56 +40,25 @@ export default class CourseItem extends Component {
   };
 
   render() {
-    let {autocompleteData, index, name, onChange, store, style, tabIndex} = this.props;
+    let {
+      backgroundColor,
+      style,
+      title
+    } = this.props;
 
     return (
       <Card
         style={{
           ...style,
-          marginBottom: '20px',
-          backgroundColor: getColor(index)
+          backgroundColor,
+          marginBottom: '20px'
         }}
         expanded={this.state.expanded}
         onExpandChange={this.handleExpandChange}
         className="courselist-card"
       >
         <CardHeader
-          title={
-            <AutoComplete
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
-              store={store}
-              id={`courseEntry${index}`}
-              searchText={name}
-              onUpdateInput={(text) => {
-                onChange(text);
-              }}
-              onNewRequest={(text) => {
-                onChange(text.text)
-              }}
-              inputStyle={{
-                fontWeight: 'normal',
-                color: 'white'
-              }}
-              underlineFocusStyle={{
-                borderColor: getLineColor(index)
-              }}
-              tabIndex={tabIndex}
-              dataSource={autocompleteData}
-              // filter={fuzzyFilter}
-              filter={caseInsensitiveFilter}
-              maxSearchResults={10}
-              menuCloseDelay={100}
-              menuStyle={{
-                width: '512px'
-              }}
-              listStyle={{
-                width: '512px'
-              }}
-            />
-          }
+          title={title}
           onClick={this.toggleExpand}
           textStyle={{
             paddingRight: 0
@@ -114,15 +69,15 @@ export default class CourseItem extends Component {
           </IconButton>
 
           {/*<IconButton
-            style={{float: 'right'}}
-            iconStyle={{fill: 'white'}}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-          >
-            <SettingsIcon />
-          </IconButton>*/}
+           style={{float: 'right'}}
+           iconStyle={{fill: 'white'}}
+           onClick={(e) => {
+           e.preventDefault();
+           e.stopPropagation();
+           }}
+           >
+           <SettingsIcon />
+           </IconButton>*/}
         </CardHeader>
 
         <CardText
@@ -132,14 +87,7 @@ export default class CourseItem extends Component {
             paddingRight: '12px'
           }}
         >
-          <ClassList
-            course={name}
-            courseIndex={index}
-            store={store}
-            onCheckboxCheck={(selected, index, classData) => {
-              store.selectClass(selected, index, classData);
-            }}
-          />
+          {this.props.children}
         </CardText>
       </Card>
     )

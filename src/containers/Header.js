@@ -7,20 +7,20 @@ import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import LinearProgress from 'material-ui/LinearProgress';
-import ToolbarSeparator from 'material-ui/Toolbar/ToolbarSeparator';
 
 @observer
 export default class Header extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      crnButtonStyle: {}
+      buttonStyle: {}
     }
   }
+
   componentDidMount() {
     this.setState({
-      crnButtonStyle: {
+      buttonStyle: {
         marginTop: '13px',
         height: '36px'
       }
@@ -29,6 +29,7 @@ export default class Header extends Component {
 
   render() {
     let {store} = this.props;
+
     return (
       <div>
         <AppBar
@@ -48,8 +49,21 @@ export default class Header extends Component {
           <RaisedButton
             secondary={true}
             label="Get CRNs"
-            style={this.state.crnButtonStyle}
+            style={this.state.buttonStyle}
             onClick={() => {
+              store.openDialog('crnDialog');
+            }}
+          />
+
+          <RaisedButton
+            secondary={true}
+            label="Export..."
+            style={{
+              ...this.state.buttonStyle,
+              marginLeft: 20
+            }}
+            onClick={() => {
+              store.openDialog('exportDialog');
             }}
           />
         </AppBar>

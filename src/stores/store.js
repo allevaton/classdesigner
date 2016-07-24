@@ -1,6 +1,7 @@
-import { action, computed, observable } from 'mobx';
-import { getColor } from '../constants/courseColors';
+import {action, computed, observable} from 'mobx';
+import {getColor} from '../constants/courseColors';
 import fetch from 'isomorphic-fetch';
+import timeStringToDate from '../util/timeStringToDate'
 
 const last = array => array[array.length - 1];
 
@@ -8,27 +9,21 @@ const _searchRegex = /^\s*([A-z]+)\s*([0-9]+)/i;
 
 const switchDays = (d) => {
   switch (d) {
-    case 'M': return 1;
-    case 'T': return 2;
-    case 'W': return 3;
-    case 'R': return 4;
-    case 'F': return 5;
+    case 'M':
+      return 1;
+    case 'T':
+      return 2;
+    case 'W':
+      return 3;
+    case 'R':
+      return 4;
+    case 'F':
+      return 5;
   }
 };
 
 const YEAR = 2000;
 const MONTH = 4;
-
-// `time` should be an hour:minute string
-const timeStringToDate = (time) => {
-  return time.split(':').reduce((hour, minute) => {
-    let intHour = Number.parseInt(hour);
-    if (minute.search('p') !== -1 && intHour !== 12)
-      intHour += 12;
-
-    return [intHour, Number.parseInt(minute)]
-  });
-};
 
 export default class Store {
   /**
@@ -165,7 +160,6 @@ export default class Store {
    * @param semesterCode
    * @see selectedSemester
    * TODO set this to autorun for when the class data or semester changes
-   * TODO make autocomplete memoized the same way as class data
    */
   @action updateAutoCompleteData(semesterCode) {
     this._searchCache[semesterCode] = {};
@@ -221,12 +215,39 @@ export default class Store {
   }
 
   @action selectClass(selected, index, classData) {
-    if (selected) {
+    if (selected)
       this.selectedClasses[index].push(classData);
-    }
-    else {
+    else
       this.selectedClasses[index].remove(classData);
-    }
+  }
+
+  @computed get crns() {
+    return Array.from(new Set(this.selectedClasses.reduce((prev, next) => {
+      return [
+        ...prev,
+        ...next.map(c => c.crn)
+      ]
+    }, [])));
+  }
+
+  @computed get crnsAndTitle() {
+    return this.selectedClasses.reduce((prev, next) => {
+      return [
+        ...prev,
+        ...next.reduce((p, n) => {
+          if (!prev.find(c => c.crn == n.crn) && !p.find(c => c.crn == n.crn))
+            return [
+              ...p,
+              {
+                crn: n.crn,
+                title: n.title
+              }
+            ];
+          else
+            return p;
+        }, [])
+      ]
+    }, []);
   }
 
   @computed get calendarEvents() {
@@ -257,7 +278,9 @@ export default class Store {
    * @type {{}}
    */
   @observable dialog = {
-    semesterSelection: {open: false}
+    semesterSelection: {open: false},
+    crnDialog: {open: false},
+    exportDialog: {open: false}
   };
 
   @action openDialog(dialog) {

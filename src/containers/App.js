@@ -7,6 +7,8 @@ import CourseList from '../containers/CourseList';
 import Header from '../containers/Header';
 import Calendar from '../components/Calendar';
 import SemesterSelectionDialog from '../containers/SemesterSelectionDialog';
+import CRNDialog from '../containers/CRNDialog';
+import ExportDialog from '../containers/ExportDialog';
 
 import moment from 'moment';
 import BigCalendar from 'react-big-calendar';
@@ -47,6 +49,8 @@ export default class App extends Component {
           </Sticky>
         </StickyContainer>
         <SemesterSelectionDialog store={store}/>
+        <CRNDialog store={store}/>
+        <ExportDialog store={store}/>
       </div>
     );
   }

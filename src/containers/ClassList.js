@@ -55,7 +55,13 @@ export default class ClassList extends Component {
   }
 
   render() {
-    let {course, courseIndex, onCheckboxCheck, store, style} = this.props;
+    let {
+      course,
+      courseIndex,
+      onCheckboxCheck,
+      store,
+      style
+    } = this.props;
 
     let checkboxProperties = {
       iconStyle: {
