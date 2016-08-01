@@ -33,6 +33,27 @@ export default class Store {
   @observable courses = ['', '', '', ''];
 
   /**
+   * @description All class data the user has access to, taken from the server
+   * @example {201310: [{subj: COMP, instructor: 'Donald Trump'}, ...]}
+   * @type {{}}
+   */
+  @observable classData = {};
+
+  /**
+   * @description Handles your selected classes. Should be stored as a 2D array.
+   * @example [[{class1}, {class2}], [{class3}, {class4}], ...]
+   * @type {Array}
+   */
+  @observable selectedClasses = [[], [], [], []];
+
+  /**
+   * Currently selected semester abiding by Wentworth's semester naming scheme
+   * @example 201610 - Fall semester of 2017
+   * @type {string}
+   */
+  @observable selectedSemester = '';
+
+  /**
    * @description Updates a specific course that the user is editing
    * @param index The course selection index that the user is typing into
    * @param courseName The text the user has entered
@@ -56,27 +77,6 @@ export default class Store {
     this.courses = ['', '', '', ''];
     this.selectedClasses = [[], [], [], []];
   }
-
-  /**
-   * @description All class data the user has access to, taken from the server
-   * @example {201310: [{subj: COMP, instructor: 'Donald Trump'}, ...]}
-   * @type {{}}
-   */
-  @observable classData = {};
-
-  /**
-   * @description Handles your selected classes. Should be stored as a 2D array.
-   * @example [[{class1}, {class2}], [{class3}, {class4}], ...]
-   * @type {Array}
-   */
-  @observable selectedClasses = [[], [], [], []];
-
-  /**
-   * Currently selected semester abiding by Wentworth's semester naming scheme
-   * @example 201610 - Fall semester of 2017
-   * @type {string}
-   */
-  @observable selectedSemester = '';
 
   @action changeSemester(newSemester) {
     if (this.selectedSemester === newSemester)
