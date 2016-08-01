@@ -24,6 +24,3 @@ Funny you ask, there's actually a web scraper component to this project.
 Since Wentworth won't give me access to their class database, I'm left with getting it myself.
 Not a big deal, I've already solved this problem!
 You can check out the web scraper project here: [Wentworth Class Scraper](example.com)
-
-# TODO
-WHEN CHANGING SEMESTERS CONTENT IS NOT RESET
