@@ -22,7 +22,6 @@ export default class CourseList extends Component {
               index={i}
               name={course}
               backgroundColor={getColor(i)}
-              autocompleteData={autocompleteData}
               store={store}
               style={{
                 minWidth: '420px'
