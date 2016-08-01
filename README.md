@@ -1,4 +1,6 @@
-# Class Designer
+# Schedule Designer
+## Screenshots
+Searching for classes
+![search][screenshots/search.png]
 
-GOOGLE CALENDAR URL TEMPLATE
-https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20160621T063000Z/20160621T080000Z&recur=RRULE:FREQ=WEEKLY;BYDAY=MO,TU,FR;UNTIL=20160120
+![calendar][screenshots/calendar.png]
