@@ -17,43 +17,44 @@ import {
 export default class CRNDialog extends Component {
   render() {
     let {store} = this.props;
-    
+
     let crns = [];
     if (store.dialog.crnDialog.open)
       crns = store.crnsAndTitle;
-    console.log(crns);
+    let crnTable;
+    
+    if (crns.length > 0)
+      crnTable = crns.map(crn => {
+        return <td style={{border: '1px solid lightgray', padding: '2px 4px 2px 4px'}} title={crn.title}>{crn.crn}</td>
+      });
+    else
+      crnTable = <td><b>Please select classes to get CRNs!</b></td>
 
     return (
       <Dialog
-        title="Here Are Your CRNs"
+        title="Here Are Your Course Registration Numbers"
         open={store.dialog.crnDialog.open}
         modal={false}
         onRequestClose={() => store.closeDialog('crnDialog')}
       >
-        <Table
-          height={250}
-        >
-          <TableHeader
-            displaySelectAll={false}
-            adjustForCheckbox={false}
-            style={{
-              borderBottom: 'none'
-            }}
-          >
-            <TableRow>
-              {crns.map(crn => {
-                return <TableHeaderColumn
-                  tooltip={crn.title}
-                  style={{
-                    color: 'black'
-                  }}
-                >
-                  {crn.crn}
-                </TableHeaderColumn>
-              })}
-            </TableRow>
-          </TableHeader>
-        </Table>
+        {crns.length > 0 && <p style={{marginTop: 0}}>
+          You can hover over each CRN to find out which class it is.
+          <br />
+          Use these numbers to register for classes.
+          <br />
+          <br />
+          Talk to your advisor about CRNs if you are confused.
+          <br />
+          <hr/>
+          </p>
+        }
+        <table style={{borderCollapse: 'collapse'}}>
+          <tbody>
+          <tr>
+            {crnTable}
+          </tr>
+          </tbody>
+        </table>
       </Dialog>
     )
   }
