@@ -2,9 +2,14 @@ import React, {PropTypes, Component} from 'react';
 
 import AutoComplete from 'material-ui/AutoComplete';
 
+const dataStoreConfig = {
+  text: 'text',
+  value: 'value'
+};
+
 // based off AutoComplete.caseInsensitiveFilter
 function caseInsensitiveFilter(searchText, key, item) {
-  return item.value.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
+  return item[dataStoreConfig.value].toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
 }
 
 export default class AutoCompleteField extends Component {
@@ -27,6 +32,7 @@ export default class AutoCompleteField extends Component {
       ...rest
     } = this.props;
 
+    // console.log(autocompleteData);
     return (
       <AutoComplete
         searchText={value}
@@ -38,6 +44,7 @@ export default class AutoCompleteField extends Component {
         }}
         tabIndex={tabIndex}
         dataSource={autocompleteData}
+        dataSourceConfig={dataStoreConfig}
         filter={caseInsensitiveFilter}
         {...rest}
       />
