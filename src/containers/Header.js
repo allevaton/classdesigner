@@ -8,6 +8,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import LinearProgress from 'material-ui/LinearProgress';
 
+import {saveAs} from 'file-saver';
+import calendarExport from '../util/calendarExport'
+
 @observer
 export default class Header extends Component {
   constructor(props) {
@@ -64,6 +67,10 @@ export default class Header extends Component {
             }}
             onClick={() => {
               store.openDialog('exportDialog');
+              calendarExport(store.selectedClasses, store.selectedSemester)
+                .then(blob => {
+                  saveAs(blob, "My Class Schedule.ics");
+                });
             }}
           />
         </AppBar>
